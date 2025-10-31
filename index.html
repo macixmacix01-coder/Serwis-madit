@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Serwis madIT • Naprawa komputerów i usługi sieciowe</title>
+<style>
+:root{
+  --bg:#071024; --card:#071827; --muted:#9bb0bd; --accent:#00b4d8; --accent-2:#6dd3ff;
+  --radius:12px; --glass:rgba(255,255,255,0.03); --glass-border:rgba(255,255,255,0.04); --maxw:1200px;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg),#02101a 80%);color:#e8f6fb;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:28px auto;padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#022;font-weight:800}
+h1{margin:0;font-size:1.25rem}
+p.lead{margin:0;color:var(--muted);font-size:0.95rem}
+nav{display:flex;gap:10px}
+a.nav{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px}
+a.nav:hover{background:rgba(255,255,255,0.03);color:#fff}
+.layout{display:grid;grid-template-columns:280px 1fr;gap:20px;margin-top:18px}
+.side{position:sticky;top:24px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid var(--glass-border)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#022;font-weight:700;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(11,31,45,0.5);transition:.2s}
+.btn.secondary{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04);box-shadow:none}
+.ripple{position:relative;overflow:hidden}
+.ripple:after{content:'';position:absolute;width:100px;height:100px;background:rgba(255,255,255,0.06);transform:scale(0);opacity:0;border-radius:50%;pointer-events:none;transition:transform .6s,opacity .8s}
+.ripple:active:after{transform:scale(6);opacity:1;transition:0s}
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.offer{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);cursor:pointer;transition:transform .18s,box-shadow .18s}
+.offer:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,10,18,0.6)}
+.offer h4{margin:0 0 6px 0}
+.offer p{margin:0;color:var(--muted);font-size:0.95rem}
+.form-row{display:grid;gap:8px}
+.field{position:relative;margin-top:8px}
+input,textarea,select{width:100%;padding:14px 14px 14px 44px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));color:inherit;outline:none}
+textarea{resize:vertical}
+.field label{position:absolute;left:14px;top:12px;color:var(--muted);font-size:0.9rem;pointer-events:none;transition:all .18s}
+input:focus + label, input:not(:placeholder-shown) + label, textarea:focus + label, textarea:not(:placeholder-shown) + label{transform:translateY(-10px);font-size:0.78rem;opacity:0.9}
+.field .icon{position:absolute;left:10px;top:12px;width:20px;height:20px;opacity:0.9}
+.toast{position:fixed;right:20px;bottom:20px;background:#051426;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.6);color:var(--muted)}
+@media (max-width:980px){.layout{grid-template-columns:1fr}.side{position:static}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">IT</div>
+      <div>
+        <h1>Serwis IT • Naprawa & Sieci</h1>
+        <p class="lead">Serwis informatyczny Maćka</p>
+      </div>
+    </div>
+    <nav>
+      <a class="nav" href="#/home">Home</a>
+      <a class="nav" href="#/oferty">Oferty</a>
+      <a class="nav" href="#/cennik">Cennik</a>
+      <a class="nav" href="#/poradniki">Poradniki</a>
+      <a class="nav" href="#/kontakt">Kontakt</a>
+      <a class="nav" href="#/koszyk">Koszyk</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <aside class="side">
+      <div class="card">
+        <h3>Panel akcji</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+          <button id="newTicketBtn" class="btn ripple">Nowe zgłoszenie</button>
+          <button id="quoteBtn" class="btn secondary ripple">Poproś o wycenę</button>
+          <button id="visitBtn" class="btn secondary ripple">Zamów wizytę</button>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <div id="appContent" class="card">
+        <!-- dynamic content -->
+      </div>
+    </main>
+  </div>
+
+  <footer style="margin-top:18px">
+    <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+      <div>© <span id="year"></span> Serwis IT</div>
+      <div style="color:var(--muted)">ul. Grodgera 45 • Tel: 696-693-002</div>
+    </div>
+  </footer>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot" style="display:none"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+emailjs.init("service_ax55e03"); // Twój Service ID
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const OFFERS = [
+  {id:1,title:'Diagnostyka laptopów', price:130, desc:'Diagnostyka, wymiana części, optymalizacja.'},
+  {id:2,title:'SSD + migracja', price:190, desc:'Klonowanie systemu, optymalizacja wydajności.'},
+  {id:3,title:'Sieć firmowa (VLAN)', price:650, desc:'Projekt i wdrożenie sieci z VLAN.'},
+  {id:4,title:'Audyt bezpieczeństwa', price:890, desc:'Analiza podatności i rekomendacje.'},
+  {id:5,title:'Abonament zdalny', price:199, desc:'Wsparcie 24/7, backup, monitoring.'}
+];
+
+let cart = JSON.parse(localStorage.getItem('cart') || "[]");
+
+function saveCart(){ localStorage.setItem('cart', JSON.stringify(cart)) }
+function addToCart(id){ const o = OFFERS.find(x => x.id===id); cart.push(o); saveCart(); showToast('Dodano do koszyka') }
+function removeFromCart(i){ cart.splice(i,1); saveCart(); renderCart(); }
+
+function renderCart(){
+  const app = document.getElementById('appContent');
+  if(!cart.length){ app.innerHTML='<h2>Koszyk</h2><p style="color:var(--muted)">Koszyk pusty</p>'; return; }
+  app.innerHTML='<h2>Koszyk</h2><ul>' + cart.map((x,i)=>`<li>${x.title} - ${x.price} PLN <button onclick="removeFromCart(${i})" class="btn secondary btn-small">Usuń</button></li>`).join('') + '</ul><button class="btn" id="checkoutBtn">Wyślij zamówienie</button>';
+  document.getElementById('checkoutBtn').addEventListener('click', sendCartEmail);
+}
+
+function sendCartEmail(){
+  if(!cart.length){ showToast('Koszyk pusty'); return; }
+  const body = 'Zamówienie z serwisu IT:\n\n' + cart.map(x=>`${x.title} - ${x.price} PLN`).join('\n');
+
+  emailjs.send('service_ax55e03','template_shwwmo5',{
+    from_name:'Klient',
+    message: body,
+    to_email:'madosowskyyy@gmail.com'
+  })
+  .then(()=>{ showToast('Zamówienie wysłane!'); cart=[]; saveCart(); renderCart(); })
+  .catch(err=>{ console.error('EmailJS error:', err); showToast('Błąd wysyłki, sprawdź konsolę'); });
+}
+
+function renderOffers(){
+  const app = document.getElementById('appContent');
+  app.innerHTML='<h2>Oferty</h2><div class="offers">' + OFFERS.map(o=>`<div class="offer"><h4>${o.title}</h4><p>${o.desc}</p><strong>${o.price} PLN</strong><br><button class="btn ripple" onclick="addToCart(${o.id})">Dodaj do koszyka</button></div>`).join('') + '</div>';
+}
+
+function renderContact(){
+  const app = document.getElementById('appContent');
+  app.innerHTML=`<h2>Kontakt</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Imię" required>
+      <input type="tel" placeholder="Telefon" required>
+      <textarea placeholder="Opis problemu"></textarea>
+      <button class="btn" id="sendBtn">Wyślij</button>
+    </form>`;
+  document.getElementById('sendBtn').addEventListener('click', e=>{ e.preventDefault(); sendContactEmail(); });
+}
+
+function sendContactEmail(){
+  const name = document.querySelector('#contactForm input[type=text]').value;
+  const phone = document.querySelector('#contactForm input[type=tel]').value;
+  const desc = document.querySelector('#contactForm textarea').value;
+  if(!name || !phone){ showToast('Wypełnij wymagane pola'); return; }
+
+  emailjs.send('service_ax55e03','template_shwwmo5',{
+    from_name:name,
+    message:desc,
+    to_email:'madosowskyyy@gmail.com'
+  })
+  .then(()=>{ showToast('Wysłano zgłoszenie'); document.getElementById('contactForm').reset(); })
+  .catch(err=>{ console.error('EmailJS error:', err); showToast('Błąd wysyłki, sprawdź konsolę'); });
+}
+
+function render(route){
+  if(route=='/oferty') renderOffers();
+  else if(route=='/koszyk') renderCart();
+  else if(route=='/kontakt') renderContact();
+  else document.getElementById('appContent').innerHTML='<h2>Witaj w Serwisie IT</h2><p style="color:var(--muted)">Kliknij ofertę, aby dodać do koszyka lub zgłoszenia.</p>';
+}
+
+window.addEventListener('hashchange', ()=>render(location.hash.replace('#','')||'/home'));
+render(location.hash.replace('#','')||'/home');
+
+document.querySelectorAll('a.nav').forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); render(a.getAttribute('href').replace('#','')) }));
+document.getElementById('newTicketBtn').addEventListener('click', ()=>renderContact());
+document.getElementById('quoteBtn').addEventListener('click', ()=>renderContact());
+document.getElementById('visitBtn').addEventListener('click', ()=>renderContact());
+
+function showToast(msg,d=3500){
+  const t = document.getElementById('toastRoot');
+  t.style.display='block';
+  const el = document.createElement('div');
+  el.className='toast';
+  el.textContent=msg;
+  t.appendChild(el);
+  setTimeout(()=>{ el.remove() }, d);
+}
+</script>
+</body>
+</html>
